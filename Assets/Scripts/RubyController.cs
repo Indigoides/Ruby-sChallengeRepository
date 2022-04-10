@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RubyController : MonoBehaviour
 {
+    public ParticleSystem HealthGain;
+    public ParticleSystem HealthHit;
+    
     public float speed = 3.0f;
     
     public int maxHealth = 5;
@@ -38,6 +41,7 @@ public class RubyController : MonoBehaviour
         currentHealth = maxHealth;
 
         audioSource = GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -102,15 +106,20 @@ public class RubyController : MonoBehaviour
     {
         if (amount < 0)
         {
+            
             if (isInvincible)
                 return;
             
             isInvincible = true;
             invincibleTimer = timeInvincible;
-            
             PlaySound(hitSound);
+            animator.SetTrigger("Hit");
+            Instantiate(HealthHit, rigidbody2d.position + Vector2.up * 1.5f, Quaternion.identity); 
         }
-        
+        if (amount > 0)
+        {
+            Instantiate(HealthGain, rigidbody2d.position + Vector2.up * 1.5f, Quaternion.identity);
+        }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);

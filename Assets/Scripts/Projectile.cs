@@ -31,7 +31,13 @@ public class Projectile : MonoBehaviour
         {
             e.Fix();
         }
-    
+        Destroy(gameObject);
+
+        HardEnemyController h = other.collider.GetComponent<HardEnemyController>();
+        if (h != null)
+        {
+            h.Fix();
+        }
         Destroy(gameObject);
     }
 }
