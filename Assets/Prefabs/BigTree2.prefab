@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3713021120075441541}
   - component: {fileID: 6424869750532417572}
   - component: {fileID: 7045265050269641740}
+  - component: {fileID: 1816761517}
   m_Layer: 0
   m_Name: BigTree2
-  m_TagString: Untagged
+  m_TagString: Blowup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014598705, y: -0.076927066}
+  m_Offset: {x: -0.014598697, y: -0.00611721}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.28682172, y: 0.049477108}
@@ -107,5 +108,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32850045, y: 0.28493}
+  m_Size: {x: 0.32850045, y: 0.86911106}
   m_EdgeRadius: 0
+--- !u!114 &1816761517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6032681630001123550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dde29db6d14201438c9c5f76fd8120a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 8300000, guid: ae904c7305df7344d86b2092c0cb3a26, type: 3}
+  HealthHit: {fileID: 0}

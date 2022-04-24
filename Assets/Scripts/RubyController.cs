@@ -6,8 +6,11 @@ public class RubyController : MonoBehaviour
 {
     public ParticleSystem HealthGain;
     public ParticleSystem HealthHit;
+
     
-    public float speed = 3.0f;
+    private float speed; 
+    private float boostTimer;
+    private bool boosting;
     
     public int maxHealth = 5;
     
@@ -15,13 +18,14 @@ public class RubyController : MonoBehaviour
     
     public AudioClip throwSound;
     public AudioClip hitSound;
+    public AudioClip talkSound;
     
     public int health { get { return currentHealth; }}
     int currentHealth;
     
     public float timeInvincible = 2.0f;
     bool isInvincible;
-    float invincibleTimer;
+    float invincibleTimer; 
     
     Rigidbody2D rigidbody2d;
     float horizontal;
@@ -35,12 +39,18 @@ public class RubyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.tag = "RubyController";
+
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         
         currentHealth = maxHealth;
 
         audioSource = GetComponent<AudioSource>();
+        
+        speed = 3;
+        boostTimer = 0;
+        boosting = false;
         
     }
 
@@ -83,6 +93,7 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
+                    PlaySound(talkSound);
                 }
             }
         }
@@ -91,8 +102,30 @@ public class RubyController : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if(boosting)
+        {
+            boostTimer += Time.deltaTime;
+            if(boostTimer >= 3)
+            {
+                speed = 3;
+                boostTimer = 0;
+                boosting = false;
+            }
+        }
+        
     }
     
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "SpeedBoost")
+        {
+            boosting = true;
+            speed = 7;
+            Destroy(gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         Vector2 position = rigidbody2d.position;
@@ -124,7 +157,7 @@ public class RubyController : MonoBehaviour
         
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
-    
+
     void Launch()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
@@ -141,4 +174,6 @@ public class RubyController : MonoBehaviour
     {
         audioSource.PlayOneShot(clip);
     }
+
+    
 }

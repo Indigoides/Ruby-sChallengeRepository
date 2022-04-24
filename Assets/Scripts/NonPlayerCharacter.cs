@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NonPlayerCharacter : MonoBehaviour
 {
+    
     public float displayTime = 4.0f;
     public GameObject dialogBox;
     float timerDisplay;
@@ -30,5 +31,6 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         timerDisplay = displayTime;
         dialogBox.SetActive(true);
+        
     }
 }

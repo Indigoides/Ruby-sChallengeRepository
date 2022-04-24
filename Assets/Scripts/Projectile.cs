@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,5 +39,18 @@ public class Projectile : MonoBehaviour
             h.Fix();
         }
         Destroy(gameObject);
+
+        ExplodeTree t = other.collider.GetComponent<ExplodeTree>();
+        if (t !=null)
+        {
+            t.DestroyTree();
+        }
+        Destroy(gameObject);
+           
+
+       
+        
+
+        
     }
 }
